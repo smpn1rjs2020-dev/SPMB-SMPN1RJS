@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smpn1rjs2020-dev.github.io/SPMB-SMPN1RJS/sitemap.xml
