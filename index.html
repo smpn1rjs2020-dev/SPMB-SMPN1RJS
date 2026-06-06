@@ -51,12 +51,26 @@ font-family:'Poppins',sans-serif;
 /* BACKGROUND */
 
 body{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    overflow-x:hidden;
-    background:url("background.jpg") center/cover no-repeat;
-    background-attachment:scroll;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+
+  background: none; /* penting */
+}
+
+/* background LOCKED layer */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: url("background.jpg") center/cover no-repeat;
+
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+
+  z-index: -2;
 }
 
 @media (min-width: 1024px){
@@ -69,26 +83,15 @@ body{
   position: fixed;
   inset: 0;
 
-  /* gelap optimal */
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,.78),
-    rgba(0,0,0,.92)
-  );
+  background: rgba(0,0,0,0.88);
 
-  /* hindari interaksi */
   pointer-events: none;
 
-  /* optimasi GPU (hilangkan delay scroll di HP) */
-  transform: translate3d(0,0,0);
-  -webkit-transform: translate3d(0,0,0);
-
+  transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 
-  /* pastikan tidak blur / filter berat */
-  backdrop-filter: none;
+  z-index: -1;
 }
 /* MAIN */
 
@@ -100,6 +103,8 @@ justify-content:center;
 align-items:center;
 padding:8px;
 text-align:center;
+position: relative;
+z-index: 1;
 }
 
 .logo{
